@@ -3,6 +3,9 @@ user_data = {}
 import telebot
 from telebot import types
 
+MENU_ITEMS = ['Pizza', 'Burger', 'French fries', 'Ribeye']
+
+
 bot = telebot.TeleBot('YOUR_TOKEN_HERE')
 
 bsm = bot.send_message
@@ -31,15 +34,10 @@ def main(message):
     bot.send_message(message.chat.id, 'Hello! This is main menu', reply_markup=markup)
 
 def menu(message):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn_pizza = tkb('Pizza')
-    btn_burger = tkb('Burger')
-    btn_french = tkb('French fries')
-    btn_rybeye = tkb('Rybeye')
-    back = tkb('Back to main')
-    markup.add(btn_pizza, btn_burger)
-    markup.add(btn_french, btn_rybeye)
-    markup.add(back)
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    buttons = [tkb(item) for item in MENU_ITEMS]
+    markup.add(*buttons)
+    markup.add(tkb('Back to main'))
     bsm(message.chat.id, 'Menu:', reply_markup=markup)
 
 def dev(message):
@@ -75,7 +73,7 @@ def logic(message):
     elif text == 'Help / Contact':
         show_help(message)
 
-    elif text in ['Pizza', 'Burger', 'French fries', 'Rybeye']:
+    elif text in MENU_ITEMS:
         if chat_id not in user_data:
             user_data[chat_id] = {'cart': []}
         user_data[chat_id]['cart'].append(text)
