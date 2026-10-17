@@ -51,13 +51,10 @@ def dev(message):
     bsm(message.chat.id, 'Please share your location for delivery:', reply_markup=markup)
 
 @bot.message_handler(content_types=['location'])
-def locat(message):
-    if message.location:
-        latitude = message.location.latitude
-        longitude = message.location.longitude
-        bsm(message.chat.id, f"Thanks! We received your location:\nLatitude: {latitude}\nLongitude: {longitude}")
-    else:
-        None
+def handle_location(message):
+    latitude = message.location.latitude
+    longitude = message.location.longitude
+    bsm(message.chat.id, f"Thanks! We received your location:\nLatitude: {latitude}\nLongitude: {longitude}")
         
 def show_help(message):
     bsm(message.chat.id, "This bot was made for my portfolio. \n Author: J4m80")
