@@ -1,15 +1,31 @@
-# Telegram Bot
-A simple Telegram bot written in Python.
+# Food Order Telegram Bot
 
-## About
-This project is a basic Telegram bot created for learning purposes.  
-It demonstrates how to work with the Telegram Bot API and handle user messages.
+A demo Telegram bot for ordering food: browse a menu, manage a cart, and share a delivery location.
 
 ## Features
-- Receives messages from users
-- Responds to basic commands
-- Simple and clear project structure
+- Reply-keyboard menu (View Menu, My order, Clear cart, Delivery, Help)
+- Add items to the cart (Pizza, Burger, French fries, Ribeye)
+- Remove an item by typing its number
+- Clear the cart
+- Request the user's location for delivery
 
-## Technologie
-- Python
-- Telegram Bot API
+## Tech
+Python 3, pyTelegramBotAPI (telebot)
+
+## Run
+    pip install pyTelegramBotAPI
+    export BOT_TOKEN="your_token_from_BotFather"
+    python bot.py
+
+## Limitations
+- Cart is stored in memory (lost on restart)
+- No payment, prices or order confirmation
+- Location is received but not stored
+
+## What I learned
+Telegram Bot API, message handlers, reply keyboards, per-user state, environment variables for secrets.
+
+## TODO
+- [ ] Fix input validation (non-ASCII digits)
+- [ ] Reply to unknown messages
+- [ ] Unit tests for cart logic
