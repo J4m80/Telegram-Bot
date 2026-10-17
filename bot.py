@@ -96,7 +96,7 @@ def logic(message):
         user_data[chat_id] = {'cart': []}
         bsm(chat_id, '🧹 Your cart has been cleared!')
 
-    elif text.isdigit():
+    elif text.isdecimal():
         cart = user_data.get(chat_id, {}).get('cart', [])
         index = int(text) - 1
         if 0 <= index < len(cart):
