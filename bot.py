@@ -1,12 +1,12 @@
 user_data = {}
 
-import telebot
+import telebot, os
 from telebot import types
 
 MENU_ITEMS = ['Pizza', 'Burger', 'French fries', 'Ribeye']
 
 
-bot = telebot.TeleBot('YOUR_TOKEN_HERE')
+bot = telebot.TeleBot(os.getenv("BOT_TOKEN"))
 
 bsm = bot.send_message
 tkb = types.KeyboardButton
