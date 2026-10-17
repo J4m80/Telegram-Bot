@@ -104,6 +104,8 @@ def logic(message):
             bsm(chat_id, f'❌ {removed} removed from your cart!')
         else:
             bsm(chat_id, '⚠️ Invalid number! Try again.')
+    else:
+        bsm(chat_id, "I didn't understand. Please use the menu buttons.")
 
 
 bot.polling(none_stop=True)
