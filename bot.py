@@ -6,11 +6,12 @@ from telebot import types
 MENU_ITEMS = ['Pizza', 'Burger', 'French fries', 'Ribeye']
 
 
-bot = telebot.TeleBot(os.getenv("BOT_TOKEN"))
+TOKEN = os.getenv("BOT_TOKEN")
+if not TOKEN:
+    raise SystemExit("Set the BOT_TOKEN environment variable first.")
 
 bsm = bot.send_message
 tkb = types.KeyboardButton
-tikb = types.InlineKeyboardButton
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -103,4 +104,5 @@ def logic(message):
         bsm(chat_id, "I didn't understand. Please use the menu buttons.")
 
 
-bot.polling(none_stop=True)
+if __name__ == "__main__":
+    bot.polling(none_stop=True)
