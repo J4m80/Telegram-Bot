@@ -38,5 +38,6 @@ Besides automated tests, I manually tested the bot: invalid item numbers, non-AS
 - Location is received but not stored
 
 ## TODO
-- [ ] Use `clear_cart` from `cart.py` in the bot
-- [ ] Tests for more edge cases
+- [ ] Add prices and order confirmation
+- [ ] Tests for edge cases: duplicate items, negative index
+- [ ] Persistent storage for carts (SQLite)
