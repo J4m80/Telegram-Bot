@@ -1,8 +1,11 @@
-user_data = {}
+import os
 
-import telebot, os
+import telebot
 from telebot import types
 
+from cart import add_item, remove_item, clear_cart
+
+user_data = {}
 MENU_ITEMS = ['Pizza', 'Burger', 'French fries', 'Ribeye']
 
 
@@ -10,6 +13,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 if not TOKEN:
     raise SystemExit("Set the BOT_TOKEN environment variable first.")
 
+bot = telebot.TeleBot(TOKEN)
 bsm = bot.send_message
 tkb = types.KeyboardButton
 
@@ -54,7 +58,7 @@ def handle_location(message):
     latitude = message.location.latitude
     longitude = message.location.longitude
     bsm(message.chat.id, f"Thanks! We received your location:\nLatitude: {latitude}\nLongitude: {longitude}")
-        
+
 def show_help(message):
     bsm(message.chat.id, "This bot was made for my portfolio. \n Author: J4m80")
 
@@ -77,7 +81,7 @@ def logic(message):
     elif text in MENU_ITEMS:
         if chat_id not in user_data:
             user_data[chat_id] = {'cart': []}
-        user_data[chat_id]['cart'].append(text)
+        add_item(user_data[chat_id]['cart'], text)
         bsm(chat_id, f'✅ {text} added to your cart!')
 
     elif text == 'My order':
@@ -95,8 +99,8 @@ def logic(message):
     elif text.isdecimal():
         cart = user_data.get(chat_id, {}).get('cart', [])
         index = int(text) - 1
-        if 0 <= index < len(cart):
-            removed = cart.pop(index)
+        removed = remove_item(cart, index)
+        if removed is not None:
             bsm(chat_id, f'❌ {removed} removed from your cart!')
         else:
             bsm(chat_id, '⚠️ Invalid number! Try again.')
