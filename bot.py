@@ -93,7 +93,8 @@ def logic(message):
             bsm(chat_id, '🛒 Your cart is empty!')
 
     elif text == 'Clear cart':
-        user_data[chat_id] = {'cart': []}
+        cart = user_data.get(chat_id, {}).get('cart', [])
+        clear_cart(cart)
         bsm(chat_id, '🧹 Your cart has been cleared!')
 
     elif text.isdecimal():
